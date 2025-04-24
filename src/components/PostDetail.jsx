@@ -55,7 +55,6 @@ function PostDetail() {
               <span className="timestamp">{post.timestamp}</span>
             </div>
           </div>
-          <button className="follow-btn">Follow</button>
         </div>
         
         <h1 className="post-title">{post.title}</h1>
@@ -97,13 +96,6 @@ function PostDetail() {
                 <span className="timestamp">{comment.timestamp}</span>
               </div>
               <p className="comment-content">{comment.content}</p>
-              <div className="comment-actions">
-                <button className="action-btn like-btn small">
-                  <span className="icon">❤️</span>
-                  <span className="count">{comment.likes}</span>
-                </button>
-                <button className="action-btn reply-btn small">Reply</button>
-              </div>
             </div>
           ))}
         </div>
