@@ -17,14 +17,11 @@ function PostCard({ post }) {
         <div className="post-actions">
           <button className="action-btn upvote-btn">
             <span className="icon">⬆️</span>
-            <span className="count">{post.likes}</span>
+            <span className="count">{post.upvotes}</span>
           </button>
           <button className="action-btn comment-btn">
             <span className="icon">💬</span>
             <span className="count">{post.comments}</span>
-          </button>
-          <button className="action-btn share-btn">
-            <span className="icon">🔄</span>
           </button>
         </div>
       </div>

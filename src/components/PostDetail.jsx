@@ -1,41 +1,38 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import { getComments, getPostById } from '../lib/supabaseFunctions';
 
 function PostDetail() {
   const { id } = useParams();
-  const [post] = useState({
-    id: id,
-    username: 'FootballFan1',
-    title: 'NFL Season Predictions',
-    content: 'Who do you think will make it to the Super Bowl this year? I think the Chiefs have a good chance to return, but the AFC competition is tough. In the NFC, I see the Eagles or 49ers making a strong push.',
-    likes: 42,
-    comments: [
-      {
-        id: 1,
-        username: 'DefenseWins',
-        content: 'I think the Bills finally break through this year!',
-        likes: 8,
-        timestamp: '1h ago'
-      },
-      {
-        id: 2,
-        username: 'QBLover22',
-        content: 'Don\'t sleep on the Lions this year. They\'re building something special.',
-        likes: 12,
-        timestamp: '30m ago'
-      },
-      {
-        id: 3,
-        username: 'FootballAnalyst',
-        content: 'Chiefs vs Eagles rematch would be epic!',
-        likes: 5,
-        timestamp: '15m ago'
-      }
-    ],
-    timestamp: '2h ago'
-  });
+  const [comments, setComments] = useState([]);
+  const [post, setPost] = useState(null);
 
-  const [newComment, setNewComment] = useState('');
+  useEffect(() => {
+    const fetchComments = async () => {
+      const { data, error } = await getComments(id);
+      if (error) {
+        console.error('Error fetching comments:', error);
+      } else {
+        console.log("Fetched comments:", data);
+        setComments(data);
+      }
+    };
+
+    const fetchPostById = async () => {
+      const { data, error } = await getPostById(id);
+      if (error) {
+        console.error('Error fetching post:', error);
+      } else {
+        console.log("Fetched post:", data);
+        setPost(data);
+      }
+    };
+
+    fetchPostById();
+    fetchComments();
+  }, [id]);
+
+
 
   const handleCommentSubmit = (e) => {
     e.preventDefault();

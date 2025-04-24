@@ -1,36 +1,23 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import PostCard from './PostCard';
+import { getPosts } from '../lib/supabaseFunctions';
 
 function HomePage() {
-  const [posts, setPosts] = useState([
-    {
-      id: 1,
-      username: 'FootballFan1',
-      title: 'NFL Season Predictions',
-      content: 'Who do you think will make it to the Super Bowl this year?',
-      likes: 42,
-      comments: 18,
-      timestamp: '2h ago'
-    },
-    {
-      id: 2,
-      username: 'QBLover22',
-      title: 'Best Quarterbacks of All Time',
-      content: 'My top 5 QBs in NFL history. What do you think?',
-      likes: 89,
-      comments: 32,
-      timestamp: '4h ago'
-    },
-    {
-      id: 3,
-      username: 'DefenseWins',
-      title: 'Defensive Strategies',
-      content: 'Analysis of the top defensive formations in college football',
-      likes: 27,
-      comments: 12,
-      timestamp: '8h ago'
-    }
-  ]);
+  const [posts, setPosts] = useState([]);
+
+  useEffect(() => {
+    const fetchPosts = async () => {
+      const { data, error } = await getPosts();
+      if (error) {
+        console.error('Error fetching posts:', error);
+      } else {
+        console.log("Fetched posts:", data);
+        setPosts(data);
+      }
+    };
+    fetchPosts();
+  }, []);
+  
 
   return (
     <div className="home-container">

@@ -11,7 +11,7 @@ export const getPosts = async () => {
         console.error('Error fetching posts:', error);
         return [];
     }
-    return data;
+    return { data, error };
 }
 
 
@@ -26,7 +26,7 @@ export const getPostById = async (id) => {
         console.error('Error fetching post:', error);
         return [];
     }
-    return data;
+    return { data, error };
 }
 
 export const getComments = async (postId) => {
@@ -39,7 +39,7 @@ export const getComments = async (postId) => {
         console.error('Error fetching comments:', error);
         return [];
     }
-    return data;
+    return { data, error };
 }
 
 export const createPost = async (postData) => {
