@@ -33,7 +33,7 @@ function CreatePost() {
                         name="title"
                         value={postData.title}
                         onChange={handleChange}
-                        placeholder="What's on your mind about football?"
+                        placeholder="What's on your mind?"
                         required
                     />
                 </div>

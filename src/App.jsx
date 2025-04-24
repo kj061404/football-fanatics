@@ -5,8 +5,20 @@ import HomePage from './components/HomePage'
 import CreatePost from './components/CreatePost'
 import PostDetail from './components/PostDetail'
 import NotFound from './components/NotFound'
+import { generateUsername } from './lib/generateUsername'
+import { useEffect } from 'react'
 
 function App() {
+
+  useEffect(() => {
+    if (!localStorage.getItem("userId")) {
+      const userId = crypto.randomUUID();
+      const username = generateUsername();
+      localStorage.setItem("userId", userId);
+      localStorage.setItem("username", username);
+    }
+  }, []);
+
   return (
     <Router>
       <div className="app">

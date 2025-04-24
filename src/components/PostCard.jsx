@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 
 function PostCard({ post }) {
   return (
+    <Link to={`/post/${post.id}`} className="post-link">
     <div className="post-card">
       <div className="post-header">
         <div className="user-info">
@@ -10,10 +11,8 @@ function PostCard({ post }) {
         </div>
         <span className="timestamp">{post.timestamp}</span>
       </div>
-      <Link to={`/post/${post.id}`} className="post-link">
         <h3 className="post-title">{post.title}</h3>
         <p className="post-content">{post.content}</p>
-      </Link>
       <div className="post-footer">
         <div className="post-actions">
           <button className="action-btn upvote-btn">
@@ -30,6 +29,7 @@ function PostCard({ post }) {
         </div>
       </div>
     </div>
+    </Link>
   );
 }
 
